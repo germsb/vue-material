@@ -448,6 +448,7 @@ exports.default = {
   props: {
     id: [String, Number],
     mdLabel: [String, Number],
+    mdRoute: String,
     mdIcon: String,
     mdActive: Boolean,
     mdDisabled: Boolean,
@@ -463,7 +464,6 @@ exports.default = {
   },
   data: function data() {
     return {
-      firstTime: true,
       mounted: false,
       tabId: this.id || 'tab-' + (0, _uniqueId2.default)(),
       width: '0px',
@@ -482,6 +482,9 @@ exports.default = {
       this.updateTabData();
     },
     mdLabel: function mdLabel() {
+      this.updateTabData();
+    },
+    mdRoute: function mdRoute() {
       this.updateTabData();
     },
     mdTooltip: function mdTooltip() {
@@ -507,6 +510,7 @@ exports.default = {
       return {
         id: this.tabId,
         label: this.mdLabel,
+        route: this.mdRoute,
         icon: this.mdIcon,
         active: this.mdActive,
         disabled: this.mdDisabled,
@@ -533,7 +537,7 @@ exports.default = {
     this.parentTabs.updateTab(tabData);
 
     if (this.mdActive) {
-      !this.firstTime ? this.parentTabs.setActiveTab(tabData) : this.firstTime = false;
+      this.parentTabs.setActiveTab(tabData);
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -771,7 +775,7 @@ exports.default = {
       this.activeTab = tabData.id;
       this.activeTabNumber = this.getTabIndex(this.activeTab);
       this.calculatePosition();
-      this.$emit('change', this.activeTabNumber);
+      this.$emit('change', { index: this.activeTabNumber, route: tabData.route });
     }
   },
   mounted: function mounted() {

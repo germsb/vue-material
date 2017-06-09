@@ -12,6 +12,7 @@
     props: {
       id: [String, Number],
       mdLabel: [String, Number],
+      mdRoute: String,
       mdIcon: String,
       mdActive: Boolean,
       mdDisabled: Boolean,
@@ -27,7 +28,6 @@
     },
     data() {
       return {
-        firstTime: true,
         mounted: false,
         tabId: this.id || 'tab-' + uniqueId(),
         width: '0px',
@@ -45,6 +45,9 @@
         this.updateTabData();
       },
       mdLabel() {
+        this.updateTabData();
+      },
+      mdRoute() {
         this.updateTabData();
       },
       mdTooltip() {
@@ -70,6 +73,7 @@
         return {
           id: this.tabId,
           label: this.mdLabel,
+          route: this.mdRoute,
           icon: this.mdIcon,
           active: this.mdActive,
           disabled: this.mdDisabled,
@@ -96,7 +100,7 @@
       this.parentTabs.updateTab(tabData);
 
       if (this.mdActive) {
-        !this.firstTime ? this.parentTabs.setActiveTab(tabData) : this.firstTime = false;
+        this.parentTabs.setActiveTab(tabData);
       }
     },
     beforeDestroy() {

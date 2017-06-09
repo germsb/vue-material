@@ -196,7 +196,7 @@
         this.activeTab = tabData.id;
         this.activeTabNumber = this.getTabIndex(this.activeTab);
         this.calculatePosition();
-        this.$emit('change', this.activeTabNumber);
+        this.$emit('change', {index: this.activeTabNumber, route: tabData.route});
       }
     },
     mounted() {
