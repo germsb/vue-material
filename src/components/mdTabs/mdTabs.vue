@@ -8,9 +8,9 @@
         class="md-tab-header"
         :class="getHeaderClass(header)"
         :disabled="header.disabled"
-        @click="setActiveTab(header)"
+        @click="setActiveTab(header, true)"
         ref="tabHeader">
-        <md-ink-ripple v-if="hasRipple" :md-disabled="header.disabled"></md-ink-ripple>
+        <md-ink-ripple v-if="mdHasRipple" :md-disabled="header.disabled"></md-ink-ripple>
         <div class="md-tab-header-container">
           <md-icon v-if="header.icon">{{ header.icon }}</md-icon>
           <span v-if="header.label">{{ header.label }}</span>
@@ -194,13 +194,15 @@
         this.transitionOff = true;
         this.calculateOnWatch();
       },
-      setActiveTab(tabData) {
+      setActiveTab(tabData, isClick) {
         this.hasIcons = !!tabData.icon;
         this.hasLabel = !!tabData.label;
         this.activeTab = tabData.id;
         this.activeTabNumber = this.getTabIndex(this.activeTab);
         this.calculatePosition();
-        this.$emit('change', {index: this.activeTabNumber, route: tabData.route});
+        if (isClick) {
+          this.$emit('change', {index: this.activeTabNumber, route: tabData.route});
+        }
       }
     },
     mounted() {

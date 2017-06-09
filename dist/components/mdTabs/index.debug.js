@@ -773,13 +773,15 @@ exports.default = {
       this.transitionOff = true;
       this.calculateOnWatch();
     },
-    setActiveTab: function setActiveTab(tabData) {
+    setActiveTab: function setActiveTab(tabData, isClick) {
       this.hasIcons = !!tabData.icon;
       this.hasLabel = !!tabData.label;
       this.activeTab = tabData.id;
       this.activeTabNumber = this.getTabIndex(this.activeTab);
       this.calculatePosition();
-      this.$emit('change', { index: this.activeTabNumber, route: tabData.route });
+      if (isClick) {
+        this.$emit('change', { index: this.activeTabNumber, route: tabData.route });
+      }
     }
   },
   mounted: function mounted() {
@@ -1207,10 +1209,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.setActiveTab(header)
+          _vm.setActiveTab(header, true)
         }
       }
-    }, [(_vm.hasRipple) ? _c('md-ink-ripple', {
+    }, [(_vm.mdHasRipple) ? _c('md-ink-ripple', {
       attrs: {
         "md-disabled": header.disabled
       }
