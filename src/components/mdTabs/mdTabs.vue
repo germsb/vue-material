@@ -204,11 +204,11 @@
         this.observeElementChanges();
         window.addEventListener('resize', this.calculateOnResize);
 
-        if (Object.keys(this.tabList).length && !this.activeTab) {
+        /*if (Object.keys(this.tabList).length && !this.activeTab) {
           let firstTab = Object.keys(this.tabList)[0];
 
           this.setActiveTab(this.tabList[firstTab]);
-        }
+        }*/
       });
     },
     beforeDestroy() {
