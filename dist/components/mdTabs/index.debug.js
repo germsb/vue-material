@@ -608,6 +608,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
   props: {
+    mdHasRipple: {
+      type: Boolean,
+      default: true
+    },
     mdFixed: Boolean,
     mdCentered: Boolean,
     mdRight: Boolean,
@@ -1206,11 +1210,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.setActiveTab(header)
         }
       }
-    }, [_c('md-ink-ripple', {
+    }, [(_vm.hasRipple) ? _c('md-ink-ripple', {
       attrs: {
         "md-disabled": header.disabled
       }
-    }), _vm._v(" "), _c('div', {
+    }) : _vm._e(), _vm._v(" "), _c('div', {
       staticClass: "md-tab-header-container"
     }, [(header.icon) ? _c('md-icon', [_vm._v(_vm._s(header.icon))]) : _vm._e(), _vm._v(" "), (header.label) ? _c('span', [_vm._v(_vm._s(header.label))]) : _vm._e(), _vm._v(" "), (header.tooltip) ? _c('md-tooltip', {
       attrs: {

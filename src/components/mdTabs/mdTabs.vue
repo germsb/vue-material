@@ -1,6 +1,6 @@
 <template>
   <div class="md-tabs" :class="[themeClass, tabClasses]">
-    <md-whiteframe md-tag="nav" class="md-tabs-navigation" :md-elevation="mdElevation" :class="navigationClasses" ref="tabNavigation">
+    <md-whiteframe md-tag="nav" class="md-tabs-navigation"  :md-elevation="mdElevation" :class="navigationClasses" ref="tabNavigation">
       <button
         v-for="header in tabList"
         :key="header.id"
@@ -10,7 +10,7 @@
         :disabled="header.disabled"
         @click="setActiveTab(header)"
         ref="tabHeader">
-        <md-ink-ripple :md-disabled="header.disabled"></md-ink-ripple>
+        <md-ink-ripple v-if="hasRipple" :md-disabled="header.disabled"></md-ink-ripple>
         <div class="md-tab-header-container">
           <md-icon v-if="header.icon">{{ header.icon }}</md-icon>
           <span v-if="header.label">{{ header.label }}</span>
@@ -37,6 +37,10 @@
 
   export default {
     props: {
+      mdHasRipple: {
+        type: Boolean,
+        default: true
+      },
       mdFixed: Boolean,
       mdCentered: Boolean,
       mdRight: Boolean,
