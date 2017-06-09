@@ -463,6 +463,7 @@ exports.default = {
   },
   data: function data() {
     return {
+      firstTime: true,
       mounted: false,
       tabId: this.id || 'tab-' + (0, _uniqueId2.default)(),
       width: '0px',
@@ -532,7 +533,7 @@ exports.default = {
     this.parentTabs.updateTab(tabData);
 
     if (this.mdActive) {
-      this.parentTabs.setActiveTab(tabData);
+      !this.firstTime ? this.parentTabs.setActiveTab(tabData) : this.firstTime = false;
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -780,10 +781,11 @@ exports.default = {
       _this4.observeElementChanges();
       window.addEventListener('resize', _this4.calculateOnResize);
 
-      /*if (Object.keys(this.tabList).length && !this.activeTab) {
-        let firstTab = Object.keys(this.tabList)[0];
-         this.setActiveTab(this.tabList[firstTab]);
-      }*/
+      if ((0, _keys2.default)(_this4.tabList).length && !_this4.activeTab) {
+        var firstTab = (0, _keys2.default)(_this4.tabList)[0];
+
+        _this4.setActiveTab(_this4.tabList[firstTab]);
+      }
     }));
   },
   beforeDestroy: function beforeDestroy() {

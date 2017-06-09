@@ -27,6 +27,7 @@
     },
     data() {
       return {
+        firstTime: true,
         mounted: false,
         tabId: this.id || 'tab-' + uniqueId(),
         width: '0px',
@@ -95,7 +96,7 @@
       this.parentTabs.updateTab(tabData);
 
       if (this.mdActive) {
-        this.parentTabs.setActiveTab(tabData);
+        !this.firstTime ? this.parentTabs.setActiveTab(tabData) : this.firstTime = false;
       }
     },
     beforeDestroy() {
